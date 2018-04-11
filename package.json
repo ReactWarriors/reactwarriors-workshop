@@ -27,7 +27,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "http://epodgaetskiy.github.io/react-workshop",
+  "homepage": "http://epodgaetskiy.github.io/reactwarriors-workshop",
   "devDependencies": {
     "gh-pages": "^1.1.0"
   }
