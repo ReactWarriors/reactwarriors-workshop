@@ -1,89 +1,55 @@
 import React from "react";
-import movies from "./movies";
-
-class MovieItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isShowOverview: false
-    };
-  }
-
-  render() {
-    const { item } = this.props;
-    // console.log("state of MovieItem", this.state);
-    // console.log("props", this.props);
-    console.log("render");
-    return (
-      <div className="card" style={{ width: "300px" }}>
-        <img className="card-img-top" src={item.backdrop_path} alt="" />
-        <div className="card-body">
-          <h6 className="card-title">{item.title}</h6>
-          <p className="mb-0">Rating: {item.vote_average}</p>
-          <button
-            onClick={() => {
-              this.setState({
-                isShowOverview: true
-              });
-            }}
-          >
-            Show overview
-          </button>
-          <button
-            onClick={() => {
-              this.setState({
-                isShowOverview: false
-              });
-            }}
-          >
-            Hide overview
-          </button>
-          {this.state.isShowOverview ? <p>{item.overview}</p> : null}
-          <button onClick={this.props.addLike}>Like</button>
-          {this.props.isLike ? <p>Это кино мне нравится</p> : null}
-        </div>
-      </div>
-    );
-  }
-}
+import MovieItem from "./MovieItem";
+import { API_KEY_3 } from "../utils";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      items: movies,
-      isLike: false
+      movies: [],
+      isFetched: false
     };
   }
 
-  addLike = () => {
-    this.setState({
-      isLike: true
-    });
-  };
+  componentDidMount() {
+    // let link = "https://api.themoviedb.org/3/movie/now_playing?api_key=";
+    // link = link + API_KEY_3;
+    // link = link + "&language=en-US&region=ru&page=1";
+    // console.log(link);
+    setTimeout(() => {
+      fetch(
+        `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY_3}&language=en-US&region=ru&page=1`
+      )
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          this.setState({
+            movies: data.results,
+            isFetched: true
+          });
+        });
+    }, 5000);
+  }
 
   render() {
-    console.log("state of App", this.state);
+    // console.log("state of App", this.state);
     return (
-      <div
-        style={{
-          display: "flex",
-          widht: "100%",
-          justifyContent: "space-between"
-        }}
-      >
-        <MovieItem
-          item={this.state.items[0]}
-          addLike={this.addLike}
-          isLike={this.state.isLike}
-        />
-        <MovieItem
-          item={this.state.items[1]}
-          addLike={this.addLike}
-          isLike={this.state.isLike}
-        />
+      <div className="container">
+        <div className="row">
+          {this.state.isFetched ? (
+            this.state.movies.map(item => {
+              return (
+                <div className="col-6" key={item.id}>
+                  <MovieItem item={item} />
+                </div>
+              );
+            })
+          ) : (
+            <p>...Loading</p>
+          )}
+        </div>
       </div>
     );
   }
