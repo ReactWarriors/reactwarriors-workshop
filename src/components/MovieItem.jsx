@@ -11,11 +11,8 @@ export default class MovieItem extends React.Component {
 
   render() {
     const { item } = this.props;
-    // console.log("state of MovieItem", this.state);
-    // console.log("props", this.props);
-    console.log(this.props);
     return (
-      <div className="card" style={{ width: "100%" }}>
+      <div className="card" style={{ width: "100%", marginBottom: "15px" }}>
         <img
           className="card-img-top"
           src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
