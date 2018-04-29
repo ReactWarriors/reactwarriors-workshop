@@ -15,7 +15,8 @@ export default class MovieItem extends React.Component {
       <div className="card" style={{ width: "100%", marginBottom: "15px" }}>
         <img
           className="card-img-top"
-          src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/w500${item.backdrop_path ||
+            item.poster_path}`}
           alt=""
         />
         <div className="card-body">
