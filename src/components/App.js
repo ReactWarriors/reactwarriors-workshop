@@ -1,81 +1,62 @@
 import React from "react";
-import movie from "./movie";
+import movies from "./movies";
+import MovieItem from "./MovieItem";
 
-// const MovieItem = new React.Component()
-class MovieItem extends React.Component {
+function LikeCounts({ likeCounts }) {
+  return <p>Количество лайков: {likeCounts} </p>;
+}
+
+class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      showOverview: true,
-      count: 5
+      movies: movies,
+      likeCounts: 0
     };
   }
 
-  render() {
-    console.log("MovieItem", this);
+  increaseLike = () => {
+    console.log("increase like");
+    this.setState({
+      likeCounts: this.state.likeCounts + 1
+    });
+  };
 
-    const templateOverview = () => {
-      if (this.state.showOverview) {
-        return (
-          <React.Fragment>
-            <p>{this.state.count}</p>
-            <p>{this.props.item.overview}</p>
-          </React.Fragment>
-        );
-      } else {
-        return <p>{this.state.count}</p>;
-      }
-    };
+  decreaseLike = () => {
+    console.log("decrease like");
+    this.setState({
+      likeCounts: this.state.likeCounts - 1
+    });
+  };
+
+  render() {
+    const { movies, likeCounts } = this.state;
     return (
-      <div className="card" style={{ width: "250px" }}>
-        <img
-          className="card-img-top"
-          src={this.props.item.backdrop_path || this.props.item.poster_path}
-          alt=""
-        />
-        <div className="card-body">
-          <h6 className="card-title">{this.props.item.title}</h6>
-          <div className="d-flex justify-content-between align-items-center">
-            <p className="mb-0">Rating: {this.props.item.vote_average}</p>
+      <div>
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <LikeCounts likeCounts={likeCounts} />
+            </div>
           </div>
-          <button
-            onClick={() => {
-              this.setState({
-                showOverview: false
-              });
-            }}
-          >
-            Hide overview
-          </button>
-          <button
-            onClick={() => {
-              this.setState({
-                showOverview: true
-              });
-            }}
-          >
-            Show overview
-          </button>
-          {templateOverview()}
+          <div className="row">
+            {movies.map((movie, index) => {
+              return (
+                <div key={index} className="col-6 mb-4">
+                  <MovieItem
+                    item={movie}
+                    increaseLike={this.increaseLike}
+                    decreaseLike={this.decreaseLike}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
   }
-}
-
-function App() {
-  // MovieItem({
-  //   item: movie,
-  //   number: 1,
-  //    text: "text",
-  //    like: true
-  // })
-  return (
-    <div>
-      <MovieItem item={movie} number={1} text="text" like={true} />
-    </div>
-  );
 }
 
 export default App;
