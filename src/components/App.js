@@ -1,6 +1,7 @@
 import React from "react";
 import movies from "./movies";
-import MovieItem from "./MovieItem";
+import MovieList from "./MovieList";
+import MovieTabs from "./MovieTabs";
 
 function LikeCounts({ likeCounts }) {
   return <p>Количество лайков: {likeCounts} </p>;
@@ -11,8 +12,8 @@ class App extends React.Component {
     super();
 
     this.state = {
-      movies: movies,
-      likeCounts: 0
+      likeCounts: 0,
+      type: "now_playing"
     };
   }
 
@@ -30,8 +31,33 @@ class App extends React.Component {
     });
   };
 
+  changeTab = tab => {
+    this.setState({
+      type: tab
+    });
+  };
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("shouldComponentUpdate");
+  //   console.log("old state", this.state);
+  //   console.log("new state", nextState);
+  //   return true;
+  // }
+
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log("componentWillUpdate");
+  //   console.log("old state", this.state);
+  //   console.log("new state", nextState);
+  // }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("componentDidUpdate");
+  //   console.log("old state", prevState);
+  //   console.log("new state", this.state);
+  // }
+
   render() {
-    const { movies, likeCounts } = this.state;
+    const { likeCounts } = this.state;
     return (
       <div>
         <div className="container">
@@ -41,18 +67,15 @@ class App extends React.Component {
             </div>
           </div>
           <div className="row">
-            {movies.map((movie, index) => {
-              return (
-                <div key={index} className="col-6 mb-4">
-                  <MovieItem
-                    item={movie}
-                    increaseLike={this.increaseLike}
-                    decreaseLike={this.decreaseLike}
-                  />
-                </div>
-              );
-            })}
+            <div className="col-12 mb-4">
+              <MovieTabs type={this.state.type} changeTab={this.changeTab} />
+            </div>
           </div>
+          <MovieList
+            type={this.state.type}
+            increaseLike={this.increaseLike}
+            decreaseLike={this.decreaseLike}
+          />
         </div>
       </div>
     );

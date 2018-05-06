@@ -2,13 +2,15 @@ import React from "react";
 
 // const MovieItem = new React.Component()
 export default class MovieItem extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       showOverview: false,
       like: false
     };
+
+    // console.log("constructor", props);
   }
 
   addLike() {
@@ -33,7 +35,7 @@ export default class MovieItem extends React.Component {
         return null;
       }
     };
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="card">
         <img
