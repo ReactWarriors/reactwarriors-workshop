@@ -1,35 +1,39 @@
 import React from "react";
-import { movie } from "./movies";
+import { movies } from "./movies";
+// import PropTypes from "prop-types";
+import MovieItem from "./MovieItem";
 
-// const MovieItem = new React.Component()
-class MovieItem extends React.Component {
+class MovieList extends React.Component {
   render() {
-    // const item = props.item
-    const { item } = this.props;
-    console.log("component this", this);
+    console.log("MovieList props", this.props);
     return (
-      <div className="card">
-        <img
-          className="card-img-top"
-          src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
-          alt=""
-        />
-        <div className="card-body">
-          <h6 className="card-title">{item.title}</h6>
-          <div className="d-flex justify-content-between align-items-center">
-            <p className="mb-0">Rating: {item.vote_average}</p>
-          </div>
-        </div>
+      <div className="row">
+        {this.props.items.map(item => {
+          return (
+            <div className="col-6 mb-4">
+              <MovieItem item={item} />
+            </div>
+          );
+        })}
       </div>
     );
   }
 }
-function App() {
-  return (
-    <div>
-      <MovieItem item={movie} />
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      movies: movies
+    };
+  }
+  render() {
+    return (
+      <div className="container">
+        <MovieList items={this.state.movies} />
+      </div>
+    );
+  }
 }
 
 export default App;
