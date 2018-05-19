@@ -30,6 +30,7 @@ export default class MovieItem extends React.Component {
     const { item } = this.props;
     // console.log("component this", this);
     // console.log("state", this.state);
+    // console.log("MovieItem props", this.props);
     return (
       <div className="card">
         <img
@@ -52,6 +53,17 @@ export default class MovieItem extends React.Component {
             Hide overview
           </button>
           {this.state.show ? <p>{item.overview}</p> : null}
+          <div>
+            <button
+              className="btn btn-primary"
+              onClick={event => {
+                console.log("event", event.target);
+                this.props.addLike();
+              }}
+            >
+              Like
+            </button>
+          </div>
         </div>
       </div>
     );
