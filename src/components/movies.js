@@ -1,4 +1,14 @@
-const movies = [
+export const movie = {
+  backdrop_path: "/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg",
+  id: 299536,
+  overview:
+    "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos.",
+  poster_path: "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+  title: "Avengers: Infinity War",
+  vote_average: 8.5
+};
+
+export const movies = [
   {
     vote_count: 74,
     id: 437557,
