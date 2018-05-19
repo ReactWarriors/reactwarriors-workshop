@@ -19,7 +19,11 @@ class MovieList extends React.Component {
         {this.state.movies.map(item => {
           return (
             <div className="col-6 mb-4">
-              <MovieItem item={item} addLike={this.props.addLike} />
+              <MovieItem
+                item={item}
+                addLike={this.props.addLike}
+                unLike={this.props.unLike}
+              />
             </div>
           );
         })}
@@ -47,11 +51,18 @@ class App extends React.Component {
       counts: this.state.counts + 1
     });
   };
+
+  unLike = () => {
+    console.log("un like");
+    this.setState({
+      counts: this.state.counts - 1
+    });
+  };
   render() {
     return (
       <div className="container">
         <LikeCounts counts={this.state.counts} />
-        <MovieList addLike={this.addLike} />
+        <MovieList addLike={this.addLike} unLike={this.unLike} />
       </div>
     );
   }

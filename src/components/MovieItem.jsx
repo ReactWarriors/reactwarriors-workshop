@@ -6,7 +6,8 @@ export default class MovieItem extends React.Component {
     super();
 
     this.state = {
-      show: false
+      show: false,
+      like: false
     };
   }
 
@@ -42,28 +43,47 @@ export default class MovieItem extends React.Component {
           <h6 className="card-title">{item.title}</h6>
           <div className="d-flex justify-content-between align-items-center">
             <p className="mb-0">Rating: {item.vote_average}</p>
+            {this.state.like ? (
+              <button
+                className="btn btn-warning"
+                onClick={event => {
+                  console.log("event", event.target);
+                  this.setState({
+                    like: false
+                  });
+                  this.props.unLike();
+                }}
+              >
+                UnLike
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary"
+                onClick={event => {
+                  console.log("event", event.target);
+                  this.setState({
+                    like: true
+                  });
+                  this.props.addLike();
+                }}
+              >
+                Like
+              </button>
+            )}
           </div>
-          <button
-            className="btn btn-primary"
-            onClick={this.showOverview.bind(this)}
-          >
-            Show overview
-          </button>
-          <button className="btn btn-warning" onClick={this.hideOverview}>
-            Hide overview
-          </button>
-          {this.state.show ? <p>{item.overview}</p> : null}
-          <div>
+          {this.state.show ? (
+            <button className="btn btn-warning" onClick={this.hideOverview}>
+              Hide overview
+            </button>
+          ) : (
             <button
               className="btn btn-primary"
-              onClick={event => {
-                console.log("event", event.target);
-                this.props.addLike();
-              }}
+              onClick={this.showOverview.bind(this)}
             >
-              Like
+              Show overview
             </button>
-          </div>
+          )}
+          {this.state.show ? <p>{item.overview}</p> : null}
         </div>
       </div>
     );
