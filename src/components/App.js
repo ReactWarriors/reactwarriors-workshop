@@ -1,23 +1,33 @@
 import React from "react";
+import { movie } from "./movies";
 
-function MovieItem(props) {
-  console.log("props", props);
-  return (
-    <div className="card">
-      <img className="card-img-top" src="" alt="" />
-      <div className="card-body">
-        <h6 className="card-title">{props.title}</h6>
-        <div className="d-flex justify-content-between align-items-center">
-          <p className="mb-0">Rating: {props.rating}</p>
+// const MovieItem = new React.Component()
+class MovieItem extends React.Component {
+  render() {
+    // const item = props.item
+    const { item } = this.props;
+    console.log("component this", this);
+    return (
+      <div className="card">
+        <img
+          className="card-img-top"
+          src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
+          alt=""
+        />
+        <div className="card-body">
+          <h6 className="card-title">{item.title}</h6>
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="mb-0">Rating: {item.vote_average}</p>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 function App() {
   return (
     <div>
-      <MovieItem title="Main title" rating={1} like={true} />
+      <MovieItem item={movie} />
     </div>
   );
 }
