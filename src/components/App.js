@@ -1,10 +1,12 @@
 import React from "react";
 // import PropTypes from "prop-types";
-import MovieList from "./MovieList";
-import MovieTabs from "./MovieTabs";
-const LikeCounts = props => {
-  return <p>Количество лайков: {props.counts}</p>;
-};
+// import MovieList from "./MovieList";
+// import MovieTabs from "./MovieTabs";
+import LoginForm from "./LoginForm";
+
+// const LikeCounts = props => {
+//   return <p>Количество лайков: {props.counts}</p>;
+// };
 
 class App extends React.Component {
   constructor() {
@@ -42,7 +44,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
+        <LoginForm />
+        {/*
+        <div className="container">
+          
         <LikeCounts counts={this.state.counts} />
         <MovieTabs type={this.state.type} changeTab={this.changeTab} />
         <MovieList
@@ -50,6 +56,9 @@ class App extends React.Component {
           unLike={this.unLike}
           type={this.state.type}
         />
+        
+        </div>
+        */}
       </div>
     );
   }
