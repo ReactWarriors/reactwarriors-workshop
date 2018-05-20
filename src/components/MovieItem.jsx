@@ -36,13 +36,26 @@ export default class MovieItem extends React.Component {
       <div className="card">
         <img
           className="card-img-top"
-          src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/w500${item.backdrop_path ||
+            item.poster_path}`}
           alt=""
         />
         <div className="card-body">
           <h6 className="card-title">{item.title}</h6>
+          <p>Rating: {item.vote_average}</p>
           <div className="d-flex justify-content-between align-items-center">
-            <p className="mb-0">Rating: {item.vote_average}</p>
+            {this.state.show ? (
+              <button className="btn btn-warning" onClick={this.hideOverview}>
+                Hide overview
+              </button>
+            ) : (
+              <button
+                className="btn btn-primary"
+                onClick={this.showOverview.bind(this)}
+              >
+                Show overview
+              </button>
+            )}
             {this.state.like ? (
               <button
                 className="btn btn-warning"
@@ -71,18 +84,7 @@ export default class MovieItem extends React.Component {
               </button>
             )}
           </div>
-          {this.state.show ? (
-            <button className="btn btn-warning" onClick={this.hideOverview}>
-              Hide overview
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary"
-              onClick={this.showOverview.bind(this)}
-            >
-              Show overview
-            </button>
-          )}
+
           {this.state.show ? <p>{item.overview}</p> : null}
         </div>
       </div>
