@@ -1,5 +1,5 @@
 import React from "react";
-
+import _ from "lodash";
 // const MovieItem = new React.Component()
 export default class MovieItem extends React.Component {
   constructor() {
@@ -26,12 +26,22 @@ export default class MovieItem extends React.Component {
       show: false
     });
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log("MovieItem", this.state, nextState);ss
+    return true;
+    // if (_.isEqual(nextProps, this.props) && _.isEqual(nextState, this.state)) {
+    //   return false;
+    // }
+    // return true;
+  }
   render() {
     // const item = props.item
     const { item } = this.props;
     // console.log("component this", this);
     // console.log("state", this.state);
     // console.log("MovieItem props", this.props);
+    // console.log("render");
     return (
       <div className="card">
         <img

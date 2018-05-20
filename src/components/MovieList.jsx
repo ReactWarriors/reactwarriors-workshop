@@ -13,10 +13,8 @@ export default class MovieList extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const link = `https://api.themoviedb.org/3/movie/${
-      this.props.type
-    }?api_key=${API_KEY_3}&language=en-US&region=ru&page=1`;
+  getMovies = type => {
+    const link = `https://api.themoviedb.org/3/movie/${type}?api_key=${API_KEY_3}&language=en-US&region=ru&page=1`;
 
     setTimeout(() => {
       fetch(link)
@@ -30,10 +28,32 @@ export default class MovieList extends React.Component {
           });
         });
     }, 1500);
+  };
+  componentDidMount() {
+    this.getMovies(this.props.type);
   }
+
+  componentWillReceiveProps(nextProps, nextState) {
+    // console.log("componentWillReceiveProps");
+    // console.log("props", this.props);
+    // console.log("new props", nextProps);
+
+    if (nextProps.type !== this.props.type) {
+      // fetch
+      this.setState({
+        isFetched: false
+      });
+      this.getMovies(nextProps.type);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("prevProps", prevProps);
+  }
+
   render() {
     // console.log("MovieList state", this.state);
-    console.log("MovieList props", this.props);
+    console.log("render props", this.props);
     return (
       <div className="row">
         {this.state.isFetched ? (
