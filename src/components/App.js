@@ -1,7 +1,7 @@
 import React from "react";
 // import PropTypes from "prop-types";
 import MovieList from "./MovieList";
-
+import MovieTabs from "./MovieTabs";
 const LikeCounts = props => {
   return <p>Количество лайков: {props.counts}</p>;
 };
@@ -11,7 +11,8 @@ class App extends React.Component {
     super();
 
     this.state = {
-      counts: 0
+      counts: 0,
+      type: "now_playing"
     };
   }
 
@@ -29,11 +30,26 @@ class App extends React.Component {
     });
   };
 
+  changeTab = type => {
+    // console.log(event.target.getAttribute("data-type"));
+    this.setState({
+      type: type
+    });
+    // this.setState({
+    //   type
+    // })
+  };
+
   render() {
     return (
       <div className="container">
         <LikeCounts counts={this.state.counts} />
-        <MovieList addLike={this.addLike} unLike={this.unLike} />
+        <MovieTabs type={this.state.type} changeTab={this.changeTab} />
+        <MovieList
+          addLike={this.addLike}
+          unLike={this.unLike}
+          type={this.state.type}
+        />
       </div>
     );
   }

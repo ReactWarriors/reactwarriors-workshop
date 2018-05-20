@@ -14,7 +14,9 @@ export default class MovieList extends React.Component {
   }
 
   componentDidMount() {
-    const link = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY_3}&language=en-US&region=ru&page=1`;
+    const link = `https://api.themoviedb.org/3/movie/${
+      this.props.type
+    }?api_key=${API_KEY_3}&language=en-US&region=ru&page=1`;
 
     setTimeout(() => {
       fetch(link)
@@ -30,8 +32,8 @@ export default class MovieList extends React.Component {
     }, 1500);
   }
   render() {
-    console.log("MovieList state", this.state);
-    // console.log("MovieList props", this.props);
+    // console.log("MovieList state", this.state);
+    console.log("MovieList props", this.props);
     return (
       <div className="row">
         {this.state.isFetched ? (
