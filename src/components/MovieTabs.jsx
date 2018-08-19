@@ -15,7 +15,9 @@ export default class MovieTabs extends React.Component {
       <ul className="tabs nav nav-pills">
         <li className="nav-item">
           <div
-            className="nav-link active"
+            className={
+              this.props.type === "now_playing" ? "nav-link active" : "nav-link"
+            }
             onClick={this.handleClick.bind(this, "now_playing")}
           >
             Now playing
@@ -23,7 +25,9 @@ export default class MovieTabs extends React.Component {
         </li>
         <li className="nav-item">
           <div
-            className="nav-link"
+            className={
+              this.props.type === "upcoming" ? "nav-link active" : "nav-link"
+            }
             data-tab="upcoming"
             onClick={this.handleClick.bind(this, "upcoming")}
           >
@@ -32,7 +36,9 @@ export default class MovieTabs extends React.Component {
         </li>
         <li className="nav-item">
           <div
-            className="nav-link"
+            className={
+              this.props.type === "popular" ? "nav-link active" : "nav-link"
+            }
             onClick={this.handleClick.bind(this, "popular")}
           >
             Popular
