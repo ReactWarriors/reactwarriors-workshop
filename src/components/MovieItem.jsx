@@ -10,16 +10,16 @@ class MovieItem extends Component {
   }
 
   changeWillWatch = () => {
-    this.setState(prevState => ({
-      willWatch: !prevState.willWatch
-    }));
+    this.setState({
+      willWatch: !this.state.willWatch
+    });
   };
 
   render() {
     const { item } = this.props;
     const { willWatch } = this.state;
     return (
-      <div className="col-4 mb-4">
+      <div className="col-6 mb-4">
         <div className="card" style={{ width: "100%" }}>
           <img
             className="card-img-top"

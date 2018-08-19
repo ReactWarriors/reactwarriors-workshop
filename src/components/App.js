@@ -1,17 +1,8 @@
 import React from "react";
-import MovieItem from "./MovieItem";
+import { movies } from "./moviesData";
+import MovieList from "./MovieList";
 
-const movie = {
-  backdrop_path: "/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg",
-  id: 299536,
-  overview:
-    "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos.",
-  poster_path: "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
-  title: "Avengers: Infinity War",
-  vote_average: 8.5
-};
-
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <div className="container">
@@ -19,9 +10,7 @@ class App extends React.Component {
           <div className="col-12">
             <div className="row mb-3">
               <div className="col-12">
-                <div className="row mt-4">
-                  <MovieItem item={movie} />
-                </div>
+                <MovieList movies={movies} />
               </div>
             </div>
           </div>
@@ -30,5 +19,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
