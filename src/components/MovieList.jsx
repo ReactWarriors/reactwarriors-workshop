@@ -11,6 +11,7 @@ export default class MovieList extends React.Component {
               key={movie.id}
               item={movie}
               addMovieToWillWatch={this.props.addMovieToWillWatch}
+              removeMovieFromWillWatch={this.props.removeMovieFromWillWatch}
             />
           );
         })}

@@ -9,10 +9,10 @@ export default class MoviesWillWatch extends React.Component {
         <ul className="list-group">
           {moviesWillWatch.map((movie, index) => {
             return (
-              <li className="list-group-item" key={index}>
+              <li className="list-group-item" key={movie.id}>
                 <div className="d-flex justify-content-between">
-                  <div>title</div>
-                  <div>vote_average</div>
+                  <div>{movie.title}</div>
+                  <div>{movie.vote_average}</div>
                 </div>
               </li>
             );

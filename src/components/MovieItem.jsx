@@ -14,10 +14,17 @@ class MovieItem extends Component {
   // };
 
   changeWillWatch = () => {
-    this.setState({
-      willWatch: !this.state.willWatch
-    });
-    this.props.addMovieToWillWatch(this.props.item);
+    if (this.state.willWatch) {
+      this.props.removeMovieFromWillWatch(this.props.item);
+      this.setState({
+        willWatch: false
+      });
+    } else {
+      this.props.addMovieToWillWatch(this.props.item);
+      this.setState({
+        willWatch: true
+      });
+    }
   };
 
   render() {
