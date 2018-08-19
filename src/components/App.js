@@ -1,64 +1,31 @@
 import React from "react";
-// import PropTypes from "prop-types";
-// import MovieList from "./MovieList";
-// import MovieTabs from "./MovieTabs";
-import LoginForm from "./LoginForm";
+import MovieItem from "./MovieItem";
 
-// const LikeCounts = props => {
-//   return <p>Количество лайков: {props.counts}</p>;
-// };
+const movie = {
+  backdrop_path: "/bOGkgRGdhrBYJSLpXaxhXVstddV.jpg",
+  id: 299536,
+  overview:
+    "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos.",
+  poster_path: "/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+  title: "Avengers: Infinity War",
+  vote_average: 8.5
+};
 
 class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      counts: 0,
-      type: "now_playing"
-    };
-  }
-
-  addLike = () => {
-    console.log("add like");
-    this.setState({
-      counts: this.state.counts + 1
-    });
-  };
-
-  unLike = () => {
-    console.log("un like");
-    this.setState({
-      counts: this.state.counts - 1
-    });
-  };
-
-  changeTab = type => {
-    // console.log(event.target.getAttribute("data-type"));
-    this.setState({
-      type: type
-    });
-    // this.setState({
-    //   type
-    // })
-  };
-
   render() {
     return (
-      <div>
-        <LoginForm />
-        {/*
-        <div className="container">
-          
-        <LikeCounts counts={this.state.counts} />
-        <MovieTabs type={this.state.type} changeTab={this.changeTab} />
-        <MovieList
-          addLike={this.addLike}
-          unLike={this.unLike}
-          type={this.state.type}
-        />
-        
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <div className="row mb-3">
+              <div className="col-12">
+                <div className="row mt-4">
+                  <MovieItem item={movie} />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        */}
       </div>
     );
   }
