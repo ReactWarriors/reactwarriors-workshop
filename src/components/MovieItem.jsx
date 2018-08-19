@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 
 class MovieItem extends Component {
-  constructor() {
-    super();
-
+  constructor(props) {
+    super(props);
     this.state = {
       willWatch: false
     };
   }
 
+  // state = {
+  //   willWatch: false,
+  //   movie: this.props.item
+  // };
+
   changeWillWatch = () => {
     this.setState({
       willWatch: !this.state.willWatch
     });
+    this.props.addMovieToWillWatch(this.props.item);
   };
 
   render() {
