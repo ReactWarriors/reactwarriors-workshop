@@ -13,12 +13,12 @@ class MovieItem extends Component {
   //   movie: this.props.item
   // };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.item !== this.props.item) {
-      return true;
-    }
-    return false;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (nextProps.item !== this.props.item) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   changeWillWatch = () => {
     if (this.state.willWatch) {
