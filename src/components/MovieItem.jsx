@@ -1,64 +1,66 @@
-import React, { Component } from "react";
+import React from "react";
 
-class MovieItem extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      willWatch: false
-    };
-  }
-
-  // state = {
-  //   willWatch: false,
-  //   movie: this.props.item
-  // };
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (nextProps.item !== this.props.item) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  changeWillWatch = () => {
-    if (this.state.willWatch) {
-      this.props.removeMovieFromWillWatch(this.props.item);
-      this.setState({
-        willWatch: false
-      });
-    } else {
-      this.props.addMovieToWillWatch(this.props.item);
-      this.setState({
-        willWatch: true
-      });
-    }
+class MovieItem extends React.Component {
+  state = {
+    willWatch: false
   };
 
   render() {
-    const { item } = this.props;
-    const { willWatch } = this.state;
+    const {
+      data,
+      deleteMovie,
+      addMovieToWillWatch,
+      deleteMovieFromWillWatch
+    } = this.props;
+    // props.data = {};
     return (
-      <div className="col-6 mb-4">
-        <div className="card" style={{ width: "100%" }}>
-          <img
-            className="card-img-top"
-            src={`https://image.tmdb.org/t/p/w500${item.backdrop_path ||
-              item.poster_path}`}
-            alt=""
-          />
-          <div className="card-body">
-            <h6 className="card-title">{item.title}</h6>
-            <div className="d-flex justify-content-between align-items-center">
-              <p className="mb-0">Rating: {item.vote_average}</p>
+      <div className="card">
+        <img
+          className="card-img-top"
+          src={`https://image.tmdb.org/t/p/w500${data.backdrop_path ||
+            data.poster_path}`}
+          alt=""
+        />
+        <div className="card-body">
+          <h6 className="card-title">{data.title}</h6>
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="mb-0">Rating: {data.vote_average}</p>
+            {this.state.willWatch ? (
               <button
                 type="button"
-                className={`btn ${willWatch ? "btn-success" : "btn-secondary"}`}
-                onClick={this.changeWillWatch}
+                className="btn btn-success"
+                onClick={() => {
+                  this.setState({
+                    willWatch: false
+                  });
+                  deleteMovieFromWillWatch(data);
+                }}
               >
                 Will Watch
               </button>
-            </div>
+            ) : (
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    this.setState({
+                      willWatch: true
+                    });
+                    addMovieToWillWatch(data);
+                  }}
+                >
+                  Will Watch
+              </button>
+              )}
           </div>
+          <button
+            type="button"
+            onClick={() => {
+              deleteMovie(data);
+            }}
+          >
+            Delete
+          </button>
         </div>
       </div>
     );
