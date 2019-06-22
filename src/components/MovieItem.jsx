@@ -5,6 +5,10 @@ class MovieItem extends React.Component {
     willWatch: false
   };
 
+  // componentWillUnmount() {
+  //   console.log("unmount", this.props.data.title);
+  // }
+
   render() {
     const {
       data,
@@ -39,19 +43,19 @@ class MovieItem extends React.Component {
                 Will Watch
               </button>
             ) : (
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => {
-                    this.setState({
-                      willWatch: true
-                    });
-                    addMovieToWillWatch(data);
-                  }}
-                >
-                  Will Watch
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => {
+                  this.setState({
+                    willWatch: true
+                  });
+                  addMovieToWillWatch(data);
+                }}
+              >
+                Will Watch
               </button>
-              )}
+            )}
           </div>
           <button
             type="button"

@@ -17,29 +17,43 @@ class App extends React.Component {
       sort_by: "revenue.desc"
     };
 
-    console.log("constructor");
+    console.log("App constructor");
   }
 
   componentDidMount() {
-    console.log("didMount");
+    console.log("App didMount");
     // const _this = this
+    this.getMovies();
+    // console.log("after fetch")
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("App didUpdate");
+    // console.log("prev", prevProps, prevState);
+    // console.log("this", this.props, this.state);
+    if (prevState.sort_by !== this.state.sort_by) {
+      console.log("App call api");
+      this.getMovies();
+    }
+  }
+
+  getMovies = () => {
     fetch(
       `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${
         this.state.sort_by
       }`
     )
       .then(response => {
-        console.log("then", response);
+        // console.log("then", response);
         return response.json();
       })
       .then(data => {
-        console.log("data", data);
+        // console.log("data", data);
         this.setState({
           movies: data.results
         });
       });
-    // console.log("after fetch")
-  }
+  };
 
   deleteMovie = movie => {
     console.log(movie.id);
@@ -78,7 +92,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log("render");
+    console.log("App render", this.state.sort_by);
     return (
       <div className="container">
         <div className="row mt-4">
