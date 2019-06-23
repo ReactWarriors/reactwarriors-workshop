@@ -1,6 +1,6 @@
 import React from "react";
 import MovieItem from "./MovieItem";
-import { API_URL, API_KEY_3 } from "../utils/api";
+import { API_KEY_3, callApi } from "../utils/api";
 import MovieTabs from "./MovieTabs";
 
 class MoviesPage extends React.Component {
@@ -31,22 +31,25 @@ class MoviesPage extends React.Component {
     }
   }
 
-  getMovies = () => {
-    fetch(
-      `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${
-        this.state.sort_by
-      }`
-    )
-      .then(response => {
-        // console.log("then", response);
-        return response.json();
-      })
-      .then(data => {
-        // console.log("data", data);
-        this.setState({
-          movies: data.results
-        });
-      });
+  // getMovies = () => {
+  //   callApi(
+  //     `discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`
+  //   ).then(data => {
+  //     // console.log("data", data);
+  //     this.setState({
+  //       movies: data.results
+  //     });
+  //   });
+  // };
+
+  getMovies = async () => {
+    const data = await callApi(
+      `discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`
+    );
+
+    this.setState({
+      movies: data.results
+    });
   };
 
   deleteMovie = movie => {
