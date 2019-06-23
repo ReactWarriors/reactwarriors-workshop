@@ -3,6 +3,7 @@ import React from "react";
 import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../utils/api";
 import MovieTabs from "./MovieTabs";
+import LoginForm from "./LoginForm";
 // UI = fn(state, props)
 
 // App = new React.Component()
