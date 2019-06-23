@@ -15,8 +15,18 @@ class App extends React.Component {
     };
   }
 
+  updateAuth = value => {
+    this.setState({
+      isAuth: value
+    });
+  };
+
   render() {
-    return this.state.isAuth ? <MoviesPage /> : <LoginForm />;
+    return this.state.isAuth ? (
+      <MoviesPage />
+    ) : (
+      <LoginForm updateAuth={this.updateAuth} />
+    );
   }
 }
 

@@ -9,7 +9,8 @@ export default class LoginForm extends React.Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      error: null
     };
   }
   componentDidMount() {
@@ -48,7 +49,43 @@ export default class LoginForm extends React.Component {
     fetch(`${API_URL}/authentication/token/new?api_key=${API_KEY_3}`)
       .then(response => response.json())
       .then(data => {
-        console.log("data", data);
+        const { request_token } = data;
+        console.log("request_token", request_token);
+        fetch(
+          `${API_URL}/authentication/token/validate_with_login?api_key=${API_KEY_3}`,
+          {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "content-type": "application/json"
+            },
+            body: JSON.stringify({
+              username: this.state.username,
+              password: this.state.password,
+              request_token: request_token
+            })
+          }
+        )
+          .then(response => {
+            console.log("response", response);
+            if (response.status <= 400) {
+              return response.json();
+            } else {
+              throw response.json();
+            }
+          })
+          .then(data => {
+            this.props.updateAuth(true);
+            console.log("post data", data);
+          })
+          .catch(response => {
+            response.then(error => {
+              console.log("error", error);
+              this.setState({
+                error: error.status_message
+              });
+            });
+          });
       });
   };
 
@@ -87,6 +124,9 @@ export default class LoginForm extends React.Component {
           <button type="submit" className="btn btn-lg btn-primary btn-block">
             Вход
           </button>
+          {this.state.error ? (
+            <div className="invalid-feedback">{this.state.error}</div>
+          ) : null}
         </form>
       </div>
     );
