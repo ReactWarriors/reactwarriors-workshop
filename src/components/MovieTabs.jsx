@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 
 class MovieTabs extends React.Component {
   componentWillReceiveProps(nextProps, nextState) {
@@ -27,9 +28,8 @@ class MovieTabs extends React.Component {
       };
     };
 
-    const getClassLink = value => {
-      return `nav-link ${sort_by === value ? "active" : ""}`;
-    };
+    const getClassLink = value =>
+      classNames("nav-link", { active: sort_by === value });
 
     console.log("MovieTabs render");
 
