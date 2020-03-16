@@ -4,6 +4,7 @@ import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3 } from "../utils/api";
 import MovieTabs from "./MovieTabs";
 import MoviesWillWatch from "./MoviesWillWatch";
+
 // UI = fn(state, props)
 
 // App = new React.Component()
